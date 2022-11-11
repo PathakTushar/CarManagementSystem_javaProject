@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 public class LandingPage {
     public static void main(String[] args) {
-        int choice;
+        String choice;
         Scanner in = new Scanner(System.in);
         boolean login_flag=false;
         boolean hasTakenPremium=false;
         int login_id=0;
-//        System.out.println("Press 1 to create the database and its respective tables else any other value if the database is already created");
-//        int database_choice=in.nextInt();
+        System.out.println("Press 1 to create the database and its respective tables else any other key to continue.......");
+        String database_choice=in.nextLine();
+        if(database_choice.equals("1")){
+            CreateDatabase.createDatabase();
+        }
         while (true)
         {
             System.out.printf("\n<----------------------------------------CHOICES--------------------------------------->\n");
@@ -26,13 +29,13 @@ public class LandingPage {
             System.out.println("press 0 for exit");
             System.out.printf("<-------------------------------------------------------------------------------------->\n");
             System.out.println("Enter your choice");
-            choice=in.nextInt();
-            if (choice==1&&login_flag){
+            choice=in.nextLine();
+            if (choice.equals("1")&&login_flag){
                 login_flag=false;
                 hasTakenPremium=false;
                 System.out.println("Logged out successfully!!");
             }
-            else if(choice==1){
+            else if(choice.equals("1")){
                 System.out.println("press a for admin and u for user");
                 char ch=in.next().charAt(0);
                 if(ch=='u'){
@@ -57,7 +60,7 @@ public class LandingPage {
                             System.out.println("Sorry, Please try once again");
                         }
                     }
-                    if (logChoice=='s')
+                    else if (logChoice=='s')
                     {
                         String username;
                         while (true)
@@ -86,8 +89,12 @@ public class LandingPage {
                         addingEntry.addCustomerDetails();
 
                     }
+                    else {
+                        System.out.println("invalid choice!!Please select the correct option");
+                    }
+
                 }
-                if (ch=='a'){
+                else if (ch=='a'){
                     int admin_login_flag=0;
                     in.nextLine();
                     System.out.println("welcome to login page");
@@ -108,8 +115,11 @@ public class LandingPage {
                     }
 
                 }
+                else {
+                    System.out.println("invalid choice!!Please select the correct option");
+                }
             }
-            else if (choice==2) {
+            else if (choice.equals("2")) {
                 if(login_flag){
                     System.out.println("Press 1 if you want to search on the brand, 2 if you want to search on the price range and 3 if you want to view all the available cars");
                     int search_choice=in.nextInt();
@@ -125,26 +135,26 @@ public class LandingPage {
                     System.out.println("please login first!!");
                 }
             }
-            else if (choice==3) {
+            else if (choice.equals("3")) {
                 if(hasTakenPremium){
                     System.out.println("you have already taken premium");
                 }
                 else if(login_flag){
-                    System.out.println("You will have to pay an amount of rs 1000 for taking premium");
+                    System.out.println("You will have to pay an amount of rs 100000 for taking premium");
                     System.out.println("Press y for yes and n for no");
                     char ch=in.next().charAt(0);
                     if(ch=='y'){
                         Premium.takePremium(login_id);
                         hasTakenPremium=true;
                     }
-                    if (ch=='n') System.out.println("you are missing many benefits of our application, please take the premium");
+                    if (ch=='n') System.out.println("you are missing many benefits of our application, we suggest you to  take the premium");
                 }
                 else {
                     System.out.println("please login first!!");
                 }
 
             }
-            else if (choice==4) {
+            else if (choice.equals("4")) {
                 if(login_flag){
                     System.out.println("Press 1 if you want to see all the available cars for buying or press 2 if you want to search for a particular brand");
                     int buy_choice=in.nextInt();
@@ -182,7 +192,7 @@ public class LandingPage {
                     System.out.println("please login first!!");
                 }
             }
-            else if (choice==5) {
+            else if (choice.equals("5")) {
                 if(login_flag){
                     if (hasTakenPremium){
                         in.nextLine();
@@ -200,7 +210,7 @@ public class LandingPage {
                         float buying_price=in.nextFloat();
 
                         System.out.println("we will reduce the price of the car per thousand kms driven by 1% from the original buying price");
-                        long percentReduced=kmsDriven/1000;
+                        long percentReduced=kmsDriven%1000!=0?kmsDriven/1000+1:kmsDriven/1000;
                         float selling_price=buying_price-(buying_price*(percentReduced+1)/100);
                         System.out.println("your car price is estimated as rs "+selling_price);
                         System.out.println("Do you want to sell it? Press y for yes and n for no");
@@ -218,14 +228,17 @@ public class LandingPage {
                 }
             }
 
-            else if (choice==6) {
-                System.out.println("there are many offers such as blah blah blah....................");
+            else if (choice.equals("6")) {
+                System.out.println("<----------------------------------------OFFERS PAGE-------------------------------------->");
+                System.out.println("If you will buy the car now, then you can get the insurance of the car(1 year) for free");
+                System.out.println("If you will take our premium then you can sell your car from our app on best deals");
+                System.out.println("<----------------------------------------------------------------------------------------->");
             }
-            else if (choice==0) {
+            else if (choice.equals("0")) {
                 break;
             }
             else {
-                System.out.println("wrong input!!");
+                System.out.println("invalid choice!!Please select the correct option");
             }
 
         }

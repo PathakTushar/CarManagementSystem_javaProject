@@ -76,7 +76,7 @@ public class AdminFunctionality {
                 break;
             }
             else {
-                System.out.println("wrong input");
+                System.out.println("invalid input choice");
             }
         }
     }
