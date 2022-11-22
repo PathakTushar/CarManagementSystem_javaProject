@@ -3,17 +3,18 @@ package com.cars.manage;
 public class Car {
     private String modelNumber;
     private String brand;
-    private String color;
+    private String color,vin;
     private float price;
 
     public Car() {
     }
 
-    public Car(String modelNumber, String brand, String color, float price) {
+    public Car(String modelNumber, String brand, String color, float price,String vin) {
         this.modelNumber = modelNumber;
         this.brand = brand;
         this.color = color;
         this.price = price;
+        this.vin = vin;
     }
 
     public String getModelNumber() {
@@ -48,10 +49,18 @@ public class Car {
         this.price = price;
     }
 
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
-                "modelNumber='" + modelNumber + '\'' +
+                "modelName='" + modelNumber + '\'' +
                 ", brand='" + brand + '\'' +
                 ", color='" + color + '\'' +
                 ", price=" + price +

@@ -2,16 +2,17 @@ package com.cars.manage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Scanner;
 
-public class CustomerDetails {
+public class Customer extends SignupAbstract{
     private String firstName;
     private String lastName;
     private String address;
     private long phoneNumber;
 
-    public CustomerDetails(){}
+    public Customer(){}
 
-    public CustomerDetails(String firstName, String lastName, String address, long phoneNumber) {
+    public Customer(String firstName, String lastName, String address, long phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -49,7 +50,25 @@ public class CustomerDetails {
     public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public void addCustomerDetails(){
+
+    @Override
+    public void acceptDetails() {
+        Scanner in =new Scanner(System.in);
+        System.out.println("Enter your firstName");
+        String firstName=in.nextLine();
+        System.out.println("Enter your lastName");
+        String lastName=in.nextLine();
+        System.out.println("Enter your address");
+        String address=in.nextLine();
+        System.out.println("Enter your phone number");
+        long phoneNumber=in.nextLong();
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setAddress(address);
+        this.setPhoneNumber(phoneNumber);
+    }
+    @Override
+    public void submitDetails(){
         try {
             Connection connection=ConnectionProvider.createConnection();
             String q= "insert into customer_details (FirstName,LastName,Address,Phone_Number) values(?,?,?,?)";

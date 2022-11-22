@@ -2,14 +2,13 @@ package com.cars.manage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
-public class Signup {
+abstract class SignupAbstract {
+
     private String userName;
     private String password;
-    public Signup(){}
-    public Signup(String userName, String password) {
+    public SignupAbstract(){}
+    public SignupAbstract(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
@@ -30,8 +29,7 @@ public class Signup {
         this.password = password;
     }
 
-    public void signup()
-    {
+    public void createAccount(){
         try {
             Connection connection=ConnectionProvider.createConnection();
             String q= "insert into signup (username,password) values(?,?)";
@@ -50,4 +48,26 @@ public class Signup {
             e.printStackTrace();
         }
     }
+    public void createAccountAdmin(){
+        try {
+            Connection connection=ConnectionProvider.createConnection();
+            String q= "insert into admin (username,password) values(?,?)";
+            PreparedStatement pstmt = connection.prepareStatement(q);
+
+            pstmt.setString(1,this.getUserName());
+            pstmt.setString(2,this.getPassword());
+
+            pstmt.executeUpdate();
+            System.out.println("Account created successfully!!");
+            connection.close();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public abstract void acceptDetails();
+    public abstract void submitDetails();
+
 }
