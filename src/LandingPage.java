@@ -1,9 +1,25 @@
-import com.cars.manage.*;
+import com.cars.manage.admin.AdminFunctionality;
+import com.cars.manage.buy.BuyingCar;
+import com.cars.manage.customer.CustomerDisplay;
+import com.cars.manage.database.CheckAlreadyExist;
+import com.cars.manage.database.CreateDatabase;
+import com.cars.manage.login.AdminLogin;
+import com.cars.manage.login.UserLogin;
+import com.cars.manage.premium.Premium;
+import com.cars.manage.ratingFeedback.RatingFeedback;
+import com.cars.manage.search.Search;
+import com.cars.manage.sell.SellingCars;
+import com.cars.manage.signup.AdminCollaborator;
+import com.cars.manage.signup.Customer;
+import com.cars.manage.update.Update;
 
 import java.util.*;
 
 public class LandingPage {
     public static void main(String[] args) {
+        System.out.println("\n                    -------------------------");
+        System.out.println("\n                      WELCOME TO CARS - 365                        ");
+        System.out.println("\n                    -------------------------\n\n");
         String choice;
         Scanner in = new Scanner(System.in);
         boolean login_flag=false;
@@ -53,7 +69,7 @@ public class LandingPage {
                             System.out.println("Logged In successfully!!");
                             login_flag=true;
                             login_id=login.getId();
-                            hasTakenPremium=Premium.checkPremium(login_id);
+                            hasTakenPremium= Premium.checkPremium(login_id);
                         }
                         else {
                             System.out.println("Sorry wrong username or password, Please try once again");
@@ -67,7 +83,7 @@ public class LandingPage {
                         {
                             System.out.println("enter the username");
                             username=in.nextLine();
-                            boolean res=CheckAlreadyExist.exists(username);
+                            boolean res= CheckAlreadyExist.exists(username);
                             if(res){
                                 System.out.println("This username is already taken!! ,try some other username");
                             }
@@ -145,7 +161,7 @@ public class LandingPage {
                         Premium.takePremium(login_id);
                         hasTakenPremium=true;
                     }
-                    else if (ch=='n') System.out.println("you are missing many benefits of our application, we suggest you to  take the premium");
+                    else if (ch=='n') System.out.println("you are missing many benefits of our application, we suggest you to  take our premium");
                     else {
                         System.out.println("invalid choice!!Please select the correct option");
                     }
